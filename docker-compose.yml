@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+ 
+  web:
+    image: httpd
+    container_name: chips
+    ports:
+    - 7890:80
+
+  db:
+    image: couchbase
+    container_name: saltchips
+    environment:
+      COUCHBASE_ROOT_PASSWORD: password
+  
+  web1:
+    image: owncloud
+    ports:
+    - 9701:80
+    links:
+    - db:couchbase
+
